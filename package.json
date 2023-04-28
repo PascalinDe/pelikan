@@ -21,12 +21,14 @@
   },
   "scripts": {
     "start:react-app": "react-scripts start",
-    "start:express-server": "node express-server/app.js",
-    "build": "react-scripts build",
+    "start:express-server": "node express-server/src/app.js",
+    "build:react-app": "react-scripts build",
+    "build:express-server": "npx tsc -p express-server/",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "watch:react-app": "onchange 'src/**/*.ts' 'src/**/*.tsx' -- npm run build",
-    "watch:express-server": "onchange 'express-server/**/*.js' -- node express-server/app.js"
+    "watch:react-app": "onchange 'src/**/*.ts' 'src/**/*.tsx' -- npm run build:react-app",
+    "watch:express-server-ts": "onchange 'express-server/src/**/*.ts' -- npm run build:express-server",
+    "watch:express-server-js": "onchange -i -k 'express-server/src/**/*.js' -- node express-server/src/app.js"
   },
   "eslintConfig": {
     "extends": [

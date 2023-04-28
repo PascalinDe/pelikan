@@ -1,12 +1,12 @@
 // third party imports
-import express from "express";
+import express, { Express, Request, Response } from "express";
 
-const app = express();
-const port = 2999;
+const app: Express = express();
+const port: number = 2999;
 
 app.get(
   "/",
-  (req, res) => {
+  (req: Request, res: Response) => {
     res.send("Hello World!");
   }
 );

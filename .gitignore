@@ -10,6 +10,7 @@
 
 # production
 /build
+/express-server/src/*.js
 
 # misc
 .DS_Store
