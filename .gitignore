@@ -12,6 +12,7 @@
 /build
 /express-server/src/*.js
 config.json
+*.db
 
 # misc
 .DS_Store

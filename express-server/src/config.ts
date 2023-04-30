@@ -1,10 +1,14 @@
 // standard library imports
 import { readFileSync, writeFileSync } from "fs";
 
-export interface Config {}
+export interface Config {
+  databaseFilename: string;
+}
 
 /** Default backend application configuration. */
-const defaultConfig: Config = {};
+const defaultConfig: Config = {
+  databaseFilename: "pelikan.db"
+};
 /** Configuration filename. */
 const configFilename: string = "./config.json"
 
