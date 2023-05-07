@@ -4,6 +4,13 @@ import sqlite3 from "sqlite3";
 // library specific imports
 import { Config } from "./config";
 
+export interface RawUrl {
+  id: number;
+  url: string;
+  description: string;
+  status_code: number;
+}
+
 const createTableStatement: string = `
 CREATE TABLE IF NOT EXISTS url(
   id INTEGER PRIMARY KEY,
@@ -23,8 +30,19 @@ CREATE TABLE IF NOT EXISTS added_to(
   FOREIGN KEY(url_id) REFERENCES url(id)
 );
 `;
+const selectUrlStatement: string = `SELECT id,url,description,status_code FROM url`;
 
 export function initDatabase(config: Config) {
   const connection: sqlite3.Database = new sqlite3.Database(config.databaseFilename);
   connection.exec(createTableStatement);
+}
+
+export function getRawUrl(config: Config, callback: Function) {
+  const connection: sqlite3.Database = new sqlite3.Database(config.databaseFilename);
+  connection.all(
+    selectUrlStatement,
+    (err: any, rows: any[]) => {
+      callback(rows);
+    }
+  );
 }
