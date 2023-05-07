@@ -31,6 +31,9 @@ CREATE TABLE IF NOT EXISTS added_to(
 );
 `;
 const selectUrlStatement: string = `SELECT id,url,description,status_code FROM url`;
+const insertUrlStatement: string = `
+INSERT INTO url (url,description,status_code) VALUES($url,$description,$status_code);
+`;
 
 export function initDatabase(config: Config) {
   const connection: sqlite3.Database = new sqlite3.Database(config.databaseFilename);
@@ -43,6 +46,17 @@ export function getRawUrl(config: Config, callback: Function) {
     selectUrlStatement,
     (err: any, rows: any[]) => {
       callback(rows);
+    }
+  );
+}
+export function postRawUrl(config: Config, rawUrl: RawUrl) {
+  const connection: sqlite3.Database = new sqlite3.Database(config.databaseFilename);
+  connection.run(
+    insertUrlStatement,
+    {
+      "$url": rawUrl.url,
+      "$description": rawUrl.description,
+      "$status_code": rawUrl.status_code
     }
   );
 }

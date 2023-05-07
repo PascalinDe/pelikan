@@ -7,6 +7,7 @@ import { initDatabase } from "./db.js";
 import { router } from "./routes.js";
 
 const app: Express = express();
+app.use(express.json());
 app.use("/", router);
 const port: number = 2999;
 const config: Config = getConfig();
